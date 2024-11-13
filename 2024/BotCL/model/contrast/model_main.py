@@ -50,8 +50,7 @@ class MainModel(nn.Module):
         # 各layerにフックを登録
         self.back_bone.layer1.register_forward_hook(self.hook_fn)
         self.back_bone.layer2.register_forward_hook(self.hook_fn)
-        self.back_bone.layer3.register_forward_hook(self.hook_fn)
-        self.back_bone.layer4.register_forward_hook(self.hook_fn)
+        #self.back_bone.layer3.register_forward_hook(self.hook_fn)
         
         if not self.pre_train:
             self.conv1x1 = nn.Conv2d(self.num_features, hidden_dim, kernel_size=(1, 1), stride=(1, 1))
@@ -75,23 +74,11 @@ class MainModel(nn.Module):
         
         # 各layerの出力
         layer1_output = self.intermediate_outputs[self.back_bone.layer1]
-        #layer2_output = self.intermediate_outputs[self.back_bone.layer2]
+        layer2_output = self.intermediate_outputs[self.back_bone.layer2]
         #layer3_output = self.intermediate_outputs[self.back_bone.layer3]
-        layer4_output = self.intermediate_outputs[self.back_bone.layer4]
         #print("Layer1 output:", layer1_output.shape)
         #print("Layer2 output:", layer2_output.shape)
         #print("Layer3 output:", layer3_output.shape)
-        #print("Layer4 output:", layer4_output.shape)
-        #print("x output:", x.shape)
-        #print(torch.eq(layer1_output, layer2_output))
-        print()
-        print()
-        
-        layer1_resize = nn.AdaptiveAvgPool2d((7, 7))
-        layer1_output_avg = layer1_resize(layer1_output)
-        print("Layer1 Avg resized:", layer1_output_avg.shape)
-        #print(torch.eq(layer1_output_avg, layer4_output)) 
-        
         
         if not self.pre_train:
             x = self.conv1x1(x)
@@ -113,7 +100,14 @@ class MainModel(nn.Module):
             cls = self.cls(cpt)
             return (cpt - 0.5) * 2, cls, attn, updates
         else:
+            layer1_output = F.adaptive_avg_pool2d(layer1_output, (7, 7))
+            layer2_output = F.adaptive_avg_pool2d(layer2_output, (7, 7))
+            layer1_output = F.adaptive_avg_pool2d(layer1_output, 1).squeeze(-1).squeeze(-1)
+            layer2_output = F.adaptive_avg_pool2d(layer2_output, 1).squeeze(-1).squeeze(-1)
+            #print("Layer1 Avg resized:", layer1_output.shape)
+            #print("Layer2 Avg resized:", layer2_output.shape)
             x = F.adaptive_max_pool2d(x, 1).squeeze(-1).squeeze(-1)
+            #print("x resized:", x.shape)
             if self.drop_rate > 0:
                 x = F.dropout(x, p=self.drop_rate, training=self.training)
             x = self.fc(x)

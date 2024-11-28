@@ -34,3 +34,27 @@
         ChatGPT 왈: maxpool의 출력: (batch_size, num_features, 1, 1)
     
         여기서 1x1 차원은 공간적인 정보를 포함X, max pool로 인해 각 채널의 요약된 특징을 1개의 값으로 응축한것. 실질적인 정보는 (batch_size, num_features)과 같음
+# BotCL 
+* model_main.py
+    115, 116행을 dim=2로 하면 attention이 아래쪽에 편중됨
+
+    ![model](./dim2_1.png)
+    ![model](./dim2_2.png)
+    ![model](./dim2_3.png)
+    意味がわからん
+
+    dim=3으로 하면 난생 첨보는 attention이...
+
+    ![model](./dim3_1.png)
+    ![model](./dim3_2.png)
+    ![model](./dim3_3.png)
+    もっと意味わからん
+
+    오키 내가 ㅄ이였다 slot.py쪽 *3위치 바꾸니까 나음.
+
+    ![model](./dim3_4.png)
+    ![model](./dim3_5.png)
+    ![model](./dim3_6.png)
+    90度回っただけやないかい
+* torch.shape -> [batch_size, channels, height, width]
+

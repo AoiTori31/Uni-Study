@@ -25,9 +25,9 @@
         数学的に内積の値が大きいほど、同じ向きを持つことを意味する。つまり、内積の計算は二つのベクトル$Q, K$の類似度を数値化する過程である。
     * 活性化関数 $\mathrm{softmax}$ の役割について
 
-        $$
-        \mathrm{softmax}(z_i) = \frac{e^{z_i}}{e^{z_1} + \cdots + e^{z_n}} = \frac{e^{z_i}}{\sum_{j=1}^{n}e^{z_{j}}}
-        $$
+    $$
+    \mathrm{softmax}(z_i) = \frac{e^{z_i}}{e^{z_1} + \cdots + e^{z_n}} = \frac{e^{z_i}}{\sum_{j=1}^{n}e^{z_{j}}}
+    $$
 
         $\mathrm{softmax}$の特徴
         

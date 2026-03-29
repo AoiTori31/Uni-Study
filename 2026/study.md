@@ -16,13 +16,16 @@
 * $\mathrm{Attention}$の計算
 
     以下に$\mathrm{Attention}$の計算式を示す。
+
     $$\mathrm{Attention} (Q, K, V) = \mathrm{softmax} ( \frac{QK^{ \mathrm{ T } }}{\sqrt{d_k}})V$$
+    
     * 内積(Dot Product)を取る理由：
     
         数学的に内積の値が大きいほど、同じ向きを持つことを意味する。つまり、内積の計算は二つのベクトル$Q, K$の類似度を数値化する過程である。
     * 活性化関数 $\mathrm{softmax}$ の役割について
 
         $$\mathrm{softmax}(z_i) = \frac{e^{z_i}}{e^{z_1} + \cdots + e^{z_n}} = \frac{e^{z_i}}{\sum_{j=1}^{n}e^{z_{j}}}$$
+
         $\mathrm{softmax}$の特徴
         
         1. 確率分布生成（正規化） : 出力が全部0~1の間の数値になり、総合が1になる。

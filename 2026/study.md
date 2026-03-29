@@ -18,7 +18,7 @@
     以下にAttentionの計算式を示す。
     
     $$
-    \mathrm{Attention} (Q, K, V) = \mathrm{softmax} ( \frac{QK^{ \mathrm{ T } }}{\sqrt{d_k}})V
+    \mathrm{Attention}(Q,K,V)=\mathrm{softmax}(\frac{QK^{ \mathrm{T}}}{\sqrt{d_k}})V
     $$
 
     * 内積(Dot Product)を取る理由：

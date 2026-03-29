@@ -16,7 +16,7 @@
 * $\mathrm{Attention}$の計算
 
     以下にAttentionの計算式を示す。
-
+    
     $$
     \mathrm{Attention} (Q, K, V) = \mathrm{softmax} ( \frac{QK^{ \mathrm{ T } }}{\sqrt{d_k}})V
     $$

@@ -15,8 +15,8 @@
         * $Q$ と $K$ の相性が良かった場合、この $V$ の情報が $Q$ に送られる。
 * $\mathrm{Attention}$の計算
 
-    以下に$\mathrm{Attention}$の計算式を示す。
-    
+    以下にAttentionの計算式を示す。
+
     $$
     \mathrm{Attention} (Q, K, V) = \mathrm{softmax} ( \frac{QK^{ \mathrm{ T } }}{\sqrt{d_k}})V
     $$

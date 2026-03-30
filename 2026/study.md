@@ -17,10 +17,10 @@
 
     以下にAttentionの計算式を示す。
     
-$$
-\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
-$$
-
+    $$
+    \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
+    $$
+    
     * 内積(Dot Product)を取る理由：
     
         数学的に内積の値が大きいほど、同じ向きを持つことを意味する。つまり、内積の計算は二つのベクトル$Q, K$の類似度を数値化する過程である。
